@@ -1,0 +1,5 @@
+/mvnw text eol=lf
+*.cmd text eol=crlf
+
+# Captured vendor HTML fixtures - exclude from GitHub language stats
+src/test/resources/scraperDocuments/** linguist-vendored
