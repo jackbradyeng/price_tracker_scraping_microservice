@@ -34,49 +34,49 @@ public class ScorptecScrapingOrchestrator implements GenericScrapingOrchestrator
     @Scheduled(cron = SCORPTEC_GPU_SCRAPING_TIME)
     public void runGPUJob() {
         List<String> urls = getProductURLs("/api/v1/scorptecproducts/gpu-page-links");
-        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls);
+        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls, "GPU");
         postPricePointsAndLogResponse("/api/v1/gpu-pricepoints", "GPU", pricePoints);
     }
 
     @Scheduled(cron = SCORPTEC_RAM_SCRAPING_TIME)
     public void runRAMJob() {
         List<String> urls = getProductURLs("/api/v1/scorptecproducts/ram-page-links");
-        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls);
+        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls, "RAM");
         postPricePointsAndLogResponse("/api/v1/ram-pricepoints", "RAM", pricePoints);
     }
 
     @Scheduled(cron = SCORPTEC_CPU_SCRAPING_TIME)
     public void runCPUJob() {
         List<String> urls = getProductURLs("/api/v1/scorptecproducts/cpu-page-links");
-        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls);
+        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls, "CPU");
         postPricePointsAndLogResponse("/api/v1/cpu-pricepoints", "CPU", pricePoints);
     }
 
     @Scheduled(cron = SCORPTEC_GPU_WORKSTATION_SCRAPING_TIME)
     public void runGPUWorkstationJob() {
         List<String> urls = getProductURLs("/api/v1/scorptecproducts/workstation-gpu-page-links");
-        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls);
+        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls, "GPU Workstation");
         postPricePointsAndLogResponse("/api/v1/workstation-gpu-pricepoints", "GPU Workstation", pricePoints);
     }
 
     @Scheduled(cron = SCORPTEC_HDD_SCRAPING_TIME)
     public void runHDDJob() {
         List<String> urls = getProductURLs("/api/v1/scorptecproducts/hdd-page-links");
-        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls);
+        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls, "HDD");
         postPricePointsAndLogResponse("/api/v1/hdd-pricepoints", "HDD", pricePoints);
     }
 
     @Scheduled(cron = SCORPTEC_SSD_SCRAPING_TIME)
     public void runSSDJob() {
         List<String> urls = getProductURLs("/api/v1/scorptecproducts/ssd-page-links");
-        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls);
+        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls, "SSD");
         postPricePointsAndLogResponse("/api/v1/ssd-pricepoints", "SSD", pricePoints);
     }
 
     @Scheduled(cron = SCORPTEC_NVME_SCRAPING_TIME)
     public void runNVMEJob() {
         List<String> urls = getProductURLs("/api/v1/scorptecproducts/nvme-page-links");
-        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls);
+        List<GenericPricePointDTO> pricePoints = scrapeProductURLs(urls, "NVME");
         postPricePointsAndLogResponse("/api/v1/nvme-pricepoints", "NVME", pricePoints);
     }
 
@@ -103,7 +103,7 @@ public class ScorptecScrapingOrchestrator implements GenericScrapingOrchestrator
 
     /** Scrapes each of the URLs passed and returns a corresponding list of GenericPricePointDTOs. Failed URLs are
      * dropped from the return list. */
-    public List<GenericPricePointDTO> scrapeProductURLs(List<String> urls) {
+    public List<GenericPricePointDTO> scrapeProductURLs(List<String> urls, String productType) {
         Instant start = Instant.now();
 
         List<GenericPricePointDTO> pricePoints = urls
@@ -115,7 +115,7 @@ public class ScorptecScrapingOrchestrator implements GenericScrapingOrchestrator
 
         Instant end = Instant.now();
         Duration timeElapsed = Duration.between(start, end);
-        log.info("%s CPU scraping service took %d seconds to execute.".formatted(SCORPTEC, timeElapsed.toSeconds()));
+        log.info("%s %s scraping service took %d seconds to execute.".formatted(SCORPTEC, productType, timeElapsed.toSeconds()));
 
         return pricePoints;
     }
