@@ -9,6 +9,7 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class RestClientConfig {
 
+    /** These environment variables need to be injected via a secrets.env file. */
     @Bean
     public RestClient restClient(
             @Value("${BASE_URL}") String baseUrl,
