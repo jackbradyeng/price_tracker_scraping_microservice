@@ -109,7 +109,7 @@ public class UmartScrapingOrchestrator implements GenericScrapingOrchestrator {
         List<GenericPricePointDTO> pricePoints = urls
                 .stream()
                 .map(url -> processPricePoint(umartScraper, genericScrapingService, UMART_SLEEPING_CONSTANT,
-                        url, UMART_CSS_MODEL_LOCATION, UMART_CSS_PRICE_LOCATION, UMART, AUD))
+                        url, UMART_CSS_MODEL_LOCATION, UMART_CSS_PRICE_LOCATION, productType, UMART, AUD))
                 .flatMap(Optional::stream)
                 .toList();
 

@@ -13,9 +13,11 @@ import java.time.temporal.ChronoUnit;
 @Service
 public class GenericScrapingService {
 
-    public GenericPricePointDTO createGenericPricePoint(ScrapedDataDTO scrapedData, String vendor, String currency) {
+    public GenericPricePointDTO createGenericPricePoint(ScrapedDataDTO scrapedData,
+                                                        String productType, String vendor, String currency) {
 
         return GenericPricePointDTO.builder()
+                .productType(productType)
                 .modelNumber(scrapedData.modelNumber())
                 .vendor(vendor)
                 .currency(currency)

@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 public class GenericPricePointDTO {
 
     private Long id;
+    private String productType;
     private String modelNumber;
     private String vendor;
     private String currency;
