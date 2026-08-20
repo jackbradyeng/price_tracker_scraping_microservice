@@ -18,6 +18,7 @@ public interface GenericScrapingOrchestrator {
                                                              String url,
                                                              String modelNumberLocation,
                                                              String priceLocation,
+                                                             String productType,
                                                              String vendor,
                                                              String currency) {
         try {
@@ -25,7 +26,7 @@ public interface GenericScrapingOrchestrator {
             return genericVendorScraper
                     .scrapeProductData(url, modelNumberLocation, priceLocation)
                     .map(scrapedData ->
-                            genericScrapingService.createGenericPricePoint(scrapedData, vendor, currency));
+                            genericScrapingService.createGenericPricePoint(scrapedData, productType, vendor, currency));
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

@@ -109,7 +109,7 @@ public class ScorptecScrapingOrchestrator implements GenericScrapingOrchestrator
         List<GenericPricePointDTO> pricePoints = urls
                 .stream()
                 .map(url -> processPricePoint(scorptecScraper, genericScrapingService, SCORPTEC_SLEEPING_CONSTANT,
-                        url, SCORPTEC_CSS_MODEL_LOCATION, SCORPTEC_CSS_PRICE_LOCATION, SCORPTEC, AUD))
+                        url, SCORPTEC_CSS_MODEL_LOCATION, SCORPTEC_CSS_PRICE_LOCATION, productType, SCORPTEC, AUD))
                 .flatMap(Optional::stream)
                 .toList();
 
