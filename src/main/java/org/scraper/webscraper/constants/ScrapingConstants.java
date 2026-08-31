@@ -5,7 +5,7 @@ public final class ScrapingConstants {
     // SCRAPING SLEEP CONSTANTS - AVOIDS OVERWHELMING TARGET SITES WITH TRAFFIC
     public static final Integer UMART_SLEEPING_CONSTANT = 500;
     // SCORPTEC SLEEPING CONSTANT IS SET HIGHER DUE TO RATE LIMITING CONCERNS
-    public static final Integer SCORPTEC_SLEEPING_CONSTANT = 3000;
+    public static final Integer SCORPTEC_SLEEPING_CONSTANT = 4000;
 
     // UMART CRON TIMESTAMPS
     public static final String UMART_GPU_SCRAPING_TIME = "0 00 22 * * ?";
